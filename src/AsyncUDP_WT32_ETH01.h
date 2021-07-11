@@ -7,11 +7,11 @@
   Built by Khoi Hoang https://github.com/khoih-prog/AsyncUDP_WT32_ETH01
   Licensed under MIT license
   
-  Version: 1.1.0
+  Version: 2.0.0
   
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
-  1.1.0   K Hoang      10/07/2021 Initial coding for WT32_ETH01. Bump up version to v1.1.0 to sync with ESPAsyncUDP v1.1.0           
+  2.0.0   K Hoang      10/07/2021 Initial coding for WT32_ETH01. Bump up version to v2.0.0 to sync with AsyncUDP v2.0.0           
  *****************************************************************************************************************************/
 
 #pragma once
@@ -19,7 +19,7 @@
 #ifndef ASYNC_UDP_WT32_ETH01_H
 #define ASYNC_UDP_WT32_ETH01_H
 
-#define ASYNC_UDP_WT32_ETH01_VERSION         "AsyncUdp_WT32_ETH01 v1.1.0"
+#define ASYNC_UDP_WT32_ETH01_VERSION         "AsyncUdp_WT32_ETH01 v2.0.0"
 
 #include "IPAddress.h"
 #include "IPv6Address.h"
