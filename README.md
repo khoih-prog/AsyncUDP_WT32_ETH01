@@ -452,7 +452,7 @@ void loop()
 
 #### 1. AsyncUdpNTPClient on ESP32_DEV with ETH_PHY_LAN8720
 
-This is terminal debug output when running [AsyncUdpNTPClient](examples/AsyncUdpNTPClient) on  **WT32_ETH01 (ESP32 + LAN8720)**. It connects to NTP Server using AsyncUDP_WT32_ETH01 library, and requests NTP time every 60s. The packet is then **received and processed asynchronously** to print current UTC/GMT time.
+This is terminal debug output when running [AsyncUdpNTPClient](https://github.com/khoih-prog/AsyncUDP_WT32_ETH01/tree/main/examples/AsyncUdpNTPClient) on  **WT32_ETH01 (ESP32 + LAN8720)**. It connects to NTP Server using AsyncUDP_WT32_ETH01 library, and requests NTP time every 60s. The packet is then **received and processed asynchronously** to print current UTC/GMT time.
 
 ##### Connect to NTP server time.windows.com (IP=168.61.215.74)
 
@@ -496,7 +496,7 @@ The UTC/GMT time is Sun 2021-07-11 03:22:33 GMT
 
 #### 2. AsyncUDPSendReceive on ESP32_DEV with ETH_PHY_LAN8720
 
-This is terminal debug output when running [AsyncUDPSendReceive](examples/AsyncUDPSendReceive) on **WT32_ETH01 (ESP32 + LAN8720)**. It connects to NTP Server `time.nist.gov` (IP=132.163.96.1) using AsyncUDP_WT32_ETH01 library, and requests NTP time every 60s. The packet is **received and processed asynchronously** to print current UTC/GMT time. The ACK packet is then sent.
+This is terminal debug output when running [AsyncUDPSendReceive](https://github.com/khoih-prog/AsyncUDP_WT32_ETH01/tree/main/examples/AsyncUdpSendReceive) on **WT32_ETH01 (ESP32 + LAN8720)**. It connects to NTP Server `time.nist.gov` (IP=132.163.96.1) using AsyncUDP_WT32_ETH01 library, and requests NTP time every 60s. The packet is **received and processed asynchronously** to print current UTC/GMT time. The ACK packet is then sent.
 
 ```
 Starting AsyncUDPSendReceive on ESP32_DEV with ETH_PHY_LAN8720
