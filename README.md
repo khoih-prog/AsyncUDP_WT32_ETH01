@@ -3,7 +3,6 @@
 
 [![arduino-library-badge](https://www.ardu-badge.com/badge/AsyncUDP_WT32_ETH01.svg?)](https://www.ardu-badge.com/AsyncUDP_WT32_ETH01)
 [![GitHub release](https://img.shields.io/github/release/khoih-prog/AsyncUDP_WT32_ETH01.svg)](https://github.com/khoih-prog/AsyncUDP_WT32_ETH01/releases)
-[![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/khoih-prog/AsyncUDP_WT32_ETH01/blob/master/LICENSE)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](#Contributing)
 [![GitHub issues](https://img.shields.io/github/issues/khoih-prog/AsyncUDP_WT32_ETH01.svg)](http://github.com/khoih-prog/AsyncUDP_WT32_ETH01/issues)
 
@@ -623,7 +622,7 @@ If you want to contribute to this project:
 
 ### License
 
-- The library is licensed under [MIT](https://github.com/khoih-prog/WebSockets2_Generic/blob/master/LICENSE)
+- The library is licensed under [GPLv3](https://github.com/khoih-prog/WebSockets2_Generic/blob/master/LICENSE)
 
 ---
 
