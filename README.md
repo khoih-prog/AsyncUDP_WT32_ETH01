@@ -622,7 +622,7 @@ If you want to contribute to this project:
 
 ### License
 
-- The library is licensed under [GPLv3](https://github.com/khoih-prog/AsyncUDP_WT32_ETH01/blob/master/LICENSE)
+- The library is licensed under [GPLv3](https://github.com/khoih-prog/AsyncUDP_WT32_ETH01/blob/main/LICENSE)
 
 ---
 
