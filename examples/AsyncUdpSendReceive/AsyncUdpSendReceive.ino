@@ -7,11 +7,12 @@
   Built by Khoi Hoang https://github.com/khoih-prog/AsyncUDP_WT32_ETH01
   Licensed under MIT license
 
-  Version: 2.0.0
+  Version: 2.0.1
   
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
-  2.0.0   K Hoang      10/07/2021 Initial coding for WT32_ETH01. Bump up version to v2.0.0 to sync with AsyncUDP v2.0.0 
+  2.0.0   K Hoang      10/07/2021 Initial coding for WT32_ETH01. Bump up version to v2.0.0 to sync with AsyncUDP v2.0.0
+  2.0.1   K Hoang      12/07/2021 Update to use WebServer_WT32_ETH01 v1.2.0
  *****************************************************************************************************************************/
 
 #define ASYNC_UDP_WT32_ETH01_DEBUG_PORT      Serial
@@ -165,10 +166,9 @@ void setup()
   //bool config(IPAddress local_ip, IPAddress gateway, IPAddress subnet, IPAddress dns1 = 0, IPAddress dns2 = 0);
   ETH.config(myIP, myGW, mySN, myDNS);
 
-  WiFi.onEvent(WT32_ETH01_Event);
+  WT32_ETH01_onEvent();
 
-  while (!eth_connected)
-    delay(100);
+  WT32_ETH01_waitForConnect();
 
   // Client address
   Serial.print("AsyncUDPSendReceive started @ IP address: ");

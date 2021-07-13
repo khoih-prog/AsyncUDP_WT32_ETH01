@@ -17,6 +17,7 @@
   * [Why Async is better](#why-async-is-better)
   * [Currently supported Boards](#currently-supported-boards)
 * [Changelog](#changelog)
+  * [Releases v2.0.1](#initial-releases-v201)
   * [Initial Releases v2.0.0](#initial-releases-v200)
 * [Prerequisites](#prerequisites)
 * [Installation](#installation)
@@ -87,6 +88,9 @@ to apply the better and faster **asynchronous** feature of the **powerful** [Asy
 
 ## Changelog
 
+### Releases v2.0.1
+
+1. Update to use WebServer_WT32_ETH01 v1.2.0
 
 ### Initial Releases v2.0.0
 
@@ -104,6 +108,7 @@ to apply the better and faster **asynchronous** feature of the **powerful** [Asy
  1. [`Arduino IDE 1.8.15+` for Arduino](https://www.arduino.cc/en/Main/Software)
  2. [`ESP32 Core 1.0.6+`](https://github.com/espressif/arduino-esp32) for ESP32-based boards. [![Latest release](https://img.shields.io/github/release/espressif/arduino-esp32.svg)](https://github.com/espressif/arduino-esp32/releases/latest/)
  
+ 3. [`WebServer_WT32_ETH01 library 1.2.0+`](https://github.com/khoih-prog/WebServer_WT32_ETH01). To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebServer_WT32_ETH01.svg?)](https://www.ardu-badge.com/WebServer_WT32_ETH01).
 ---
 
 ### Installation
@@ -415,10 +420,9 @@ void setup()
   //bool config(IPAddress local_ip, IPAddress gateway, IPAddress subnet, IPAddress dns1 = 0, IPAddress dns2 = 0);
   ETH.config(myIP, myGW, mySN, myDNS);
 
-  WiFi.onEvent(WT32_ETH01_Event);
+  WT32_ETH01_onEvent();
 
-  while (!eth_connected)
-    delay(100);
+  WT32_ETH01_waitForConnect();
 
   // Client address
   Serial.print("AsyncUdpNTPClient started @ IP address: ");
@@ -457,8 +461,10 @@ This is terminal debug output when running [AsyncUdpNTPClient](https://github.co
 
 ```
 Starting AsyncUdpNTPClient on ESP32_DEV with ETH_PHY_LAN8720
-WebServer_WT32_ETH01 v1.1.0
-ETH MAC: A8:03:2A:A1:61:73, IPv4: 192.168.2.232, FULL_DUPLEX, 100Mbps
+WebServer_WT32_ETH01 v1.2.0
+AsyncUdp_WT32_ETH01 v2.0.1
+ETH MAC: A8:03:2A:A1:61:73, IPv4: 192.168.2.232
+FULL_DUPLEX, 100Mbps
 AsyncUdpNTPClient started @ IP address: 192.168.2.232
 UDP connected
 ============= createNTPpacket =============
@@ -479,8 +485,10 @@ The UTC/GMT time is Sun 2021-07-11 03:21:06 GMT
 
 ```
 Starting AsyncUdpNTPClient on ESP32_DEV with ETH_PHY_LAN8720
-WebServer_WT32_ETH01 v1.1.0
-ETH MAC: A8:03:2A:A1:61:73, IPv4: 192.168.2.232, FULL_DUPLEX, 100Mbps
+WebServer_WT32_ETH01 v1.2.0
+AsyncUdp_WT32_ETH01 v2.0.1
+ETH MAC: A8:03:2A:A1:61:73, IPv4: 192.168.2.232
+FULL_DUPLEX, 100Mbps
 AsyncUdpNTPClient started @ IP address: 192.168.2.232
 UDP connected
 ============= createNTPpacket =============
@@ -499,9 +507,10 @@ This is terminal debug output when running [AsyncUDPSendReceive](https://github.
 
 ```
 Starting AsyncUDPSendReceive on ESP32_DEV with ETH_PHY_LAN8720
-WebServer_WT32_ETH01 v1.1.0
-AsyncUdp_WT32_ETH01 v2.0.0
-ETH MAC: A8:03:2A:A1:61:73, IPv4: 192.168.2.232, FULL_DUPLEX, 100Mbps
+WebServer_WT32_ETH01 v1.2.0
+AsyncUdp_WT32_ETH01 v2.0.1
+ETH MAC: A8:03:2A:A1:61:73, IPv4: 192.168.2.232
+FULL_DUPLEX, 100Mbps
 AsyncUDPSendReceive started @ IP address: 192.168.2.232
 
 Starting connection to server...
@@ -558,6 +567,9 @@ Sometimes, the library will only work if you update the `STM32` core to the late
 
 ## Releases
 
+### Releases v2.0.1
+
+1. Update to use WebServer_WT32_ETH01 v1.2.0
 
 ### Initial Releases v2.0.0
 
