@@ -6,13 +6,6 @@
   Based on and modified from ESPAsyncUDP Library (https://github.com/me-no-dev/ESPAsyncUDP)
   Built by Khoi Hoang https://github.com/khoih-prog/AsyncUDP_WT32_ETH01
   Licensed under MIT license
-
-  Version: 2.0.1
-  
-  Version Modified By   Date      Comments
-  ------- -----------  ---------- -----------
-  2.0.0   K Hoang      10/07/2021 Initial coding for WT32_ETH01. Bump up version to v2.0.0 to sync with AsyncUDP v2.0.0
-  2.0.1   K Hoang      12/07/2021 Update to use WebServer_WT32_ETH01 v1.2.0
  *****************************************************************************************************************************/
 #include <Arduino.h>
 

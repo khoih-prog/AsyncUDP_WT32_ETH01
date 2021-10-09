@@ -36,8 +36,10 @@ IPAddress myDNS(8, 8, 8, 8);
 
 #include <time.h>
 
-//IPAddress timeServerIP = IPAddress(168,  61, 215, 74);   // time.windows.com
-IPAddress timeServerIP = IPAddress(132, 163,  96,  1);   // time.nist.gov
+// 0.ca.pool.ntp.org
+IPAddress timeServerIP = IPAddress(208, 81, 1, 244);
+// time.nist.gov
+//IPAddress timeServerIP = IPAddress(132, 163, 96, 1);
 
 #define NTP_REQUEST_PORT      123
 
