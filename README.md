@@ -16,9 +16,7 @@
   * [Features](#features)
   * [Why Async is better](#why-async-is-better)
   * [Currently supported Boards](#currently-supported-boards)
-* [Changelog](#changelog)
-  * [Releases v2.0.1](#initial-releases-v201)
-  * [Initial Releases v2.0.0](#initial-releases-v200)
+* [Changelog](changelog.md)
 * [Prerequisites](#prerequisites)
 * [Installation](#installation)
   * [Use Arduino Library Manager](#use-arduino-library-manager)
@@ -44,7 +42,6 @@
   * [2. AsyncUDPSendReceive on on ESP32_DEV with ETH_PHY_LAN8720](#2-asyncudpsendreceive-on-esp32_dev-with-eth_phy_lan8720)
 * [Debug](#debug)
 * [Troubleshooting](#troubleshooting)
-* [Releases](#releases)
 * [Issues](#issues)
 * [TO DO](#to-do)
 * [DONE](#done)
@@ -86,29 +83,13 @@ to apply the better and faster **asynchronous** feature of the **powerful** [Asy
 ---
 ---
 
-## Changelog
-
-### Releases v2.0.1
-
-1. Update to use WebServer_WT32_ETH01 v1.2.0
-
-### Initial Releases v2.0.0
-
-1. Initial coding to port [AsyncUDP](https://github.com/espressif/arduino-esp32/tree/master/libraries/AsyncUDP) to WT32_ETH01 (ESP32 + LAN8720)
-2. Add more examples.
-3. Add debugging features.
-4. Bump up to v2.0.0 to sync with [AsyncUDP v2.0.0](https://github.com/espressif/arduino-esp32/tree/master/libraries/AsyncUDP).
-
-
----
----
 
 ## Prerequisites
 
- 1. [`Arduino IDE 1.8.15+` for Arduino](https://www.arduino.cc/en/Main/Software)
- 2. [`ESP32 Core 1.0.6+`](https://github.com/espressif/arduino-esp32) for ESP32-based boards. [![Latest release](https://img.shields.io/github/release/espressif/arduino-esp32.svg)](https://github.com/espressif/arduino-esp32/releases/latest/)
+ 1. [`Arduino IDE 1.8.16+` for Arduino](https://www.arduino.cc/en/Main/Software)
+ 2. [`ESP32 Core 2.0.0+`](https://github.com/espressif/arduino-esp32) for ESP32-based boards. [![Latest release](https://img.shields.io/github/release/espressif/arduino-esp32.svg)](https://github.com/espressif/arduino-esp32/releases/latest/)
  
- 3. [`WebServer_WT32_ETH01 library 1.2.0+`](https://github.com/khoih-prog/WebServer_WT32_ETH01). To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebServer_WT32_ETH01.svg?)](https://www.ardu-badge.com/WebServer_WT32_ETH01).
+ 3. [`WebServer_WT32_ETH01 library 1.2.1+`](https://github.com/khoih-prog/WebServer_WT32_ETH01). To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebServer_WT32_ETH01.svg?)](https://www.ardu-badge.com/WebServer_WT32_ETH01).
 ---
 
 ### Installation
@@ -212,8 +193,10 @@ IPAddress myDNS(8, 8, 8, 8);
 
 #include <time.h>
 
-//IPAddress timeServerIP = IPAddress(168,  61, 215, 74);   // time.windows.com
-IPAddress timeServerIP = IPAddress(132, 163,  96,  1);   // time.nist.gov
+// 0.ca.pool.ntp.org
+IPAddress timeServerIP = IPAddress(208, 81, 1, 244);
+// time.nist.gov
+//IPAddress timeServerIP = IPAddress(132, 163, 96, 1);
 
 #define NTP_REQUEST_PORT      123
 
@@ -306,8 +289,10 @@ IPAddress myDNS(8, 8, 8, 8);
 
 #include <time.h>
 
-//IPAddress timeServerIP = IPAddress(168,  61, 215, 74);   // time.windows.com
-IPAddress timeServerIP = IPAddress(132, 163,  96,  1);   // time.nist.gov
+// 0.ca.pool.ntp.org
+IPAddress timeServerIP = IPAddress(208, 81, 1, 244);
+// time.nist.gov
+//IPAddress timeServerIP = IPAddress(132, 163, 96, 1);
 
 #define NTP_REQUEST_PORT      123
 
@@ -461,8 +446,8 @@ This is terminal debug output when running [AsyncUdpNTPClient](https://github.co
 
 ```
 Starting AsyncUdpNTPClient on ESP32_DEV with ETH_PHY_LAN8720
-WebServer_WT32_ETH01 v1.2.0
-AsyncUdp_WT32_ETH01 v2.0.1
+WebServer_WT32_ETH01 v1.2.1
+AsyncUdp_WT32_ETH01 v2.0.2
 ETH MAC: A8:03:2A:A1:61:73, IPv4: 192.168.2.232
 FULL_DUPLEX, 100Mbps
 AsyncUdpNTPClient started @ IP address: 192.168.2.232
@@ -485,8 +470,8 @@ The UTC/GMT time is Sun 2021-07-11 03:21:06 GMT
 
 ```
 Starting AsyncUdpNTPClient on ESP32_DEV with ETH_PHY_LAN8720
-WebServer_WT32_ETH01 v1.2.0
-AsyncUdp_WT32_ETH01 v2.0.1
+WebServer_WT32_ETH01 v1.2.1
+AsyncUdp_WT32_ETH01 v2.0.2
 ETH MAC: A8:03:2A:A1:61:73, IPv4: 192.168.2.232
 FULL_DUPLEX, 100Mbps
 AsyncUdpNTPClient started @ IP address: 192.168.2.232
@@ -507,8 +492,8 @@ This is terminal debug output when running [AsyncUDPSendReceive](https://github.
 
 ```
 Starting AsyncUDPSendReceive on ESP32_DEV with ETH_PHY_LAN8720
-WebServer_WT32_ETH01 v1.2.0
-AsyncUdp_WT32_ETH01 v2.0.1
+WebServer_WT32_ETH01 v1.2.1
+AsyncUdp_WT32_ETH01 v2.0.2
 ETH MAC: A8:03:2A:A1:61:73, IPv4: 192.168.2.232
 FULL_DUPLEX, 100Mbps
 AsyncUDPSendReceive started @ IP address: 192.168.2.232
@@ -565,28 +550,6 @@ Sometimes, the library will only work if you update the `STM32` core to the late
 ---
 ---
 
-## Releases
-
-### Releases v2.0.1
-
-1. Update to use WebServer_WT32_ETH01 v1.2.0
-
-### Initial Releases v2.0.0
-
-1. Initial coding to port [AsyncUDP](https://github.com/espressif/arduino-esp32/tree/master/libraries/AsyncUDP) to WT32_ETH01 (ESP32 + LAN8720)
-2. Add more examples.
-3. Add debugging features.
-4. Bump up to v2.0.0 to sync with [AsyncUDP v2.0.0](https://github.com/espressif/arduino-esp32/tree/master/libraries/AsyncUDP).
-
----
-
-#### Supported Boards
-
- 1. **WT32_ETH01 boards** using ESP32-based boards and LAN8720 Ethernet
-
-
----
----
 
 ### Issues ###
 
