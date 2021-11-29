@@ -7,13 +7,14 @@
   Built by Khoi Hoang https://github.com/khoih-prog/AsyncUDP_WT32_ETH01
   Licensed under MIT license
   
-  Version: 2.0.2
+  Version: 2.0.3
   
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
   2.0.0   K Hoang      10/07/2021 Initial coding for WT32_ETH01. Bump up version to v2.0.0 to sync with AsyncUDP v2.0.0
   2.0.1   K Hoang      12/07/2021 Update to use WebServer_WT32_ETH01 v1.2.0
   2.0.2   K Hoang      09/10/2021 Update `platform.ini` and `library.json`
+  2.0.3   K Hoang      29/11/2021 Auto detect ESP32 core version. Optimize library code. Fix bug in examples
  *****************************************************************************************************************************/
 
 #pragma once
@@ -1391,54 +1392,5 @@ void AsyncUDP::onPacket(AuPacketHandlerFunction cb)
 
 ////////////////////////////////////////////////
 
-bool eth_connected = false;
 
-void WT32_ETH01_Event(WiFiEvent_t event)
-{
-  switch (event)
-  {
-    case SYSTEM_EVENT_ETH_START:
-      ASYNC_UDP_LOG(F("\nETH Started"));
-      //set eth hostname here
-      ETH.setHostname("WT32-ETH01");
-      break;
-    case SYSTEM_EVENT_ETH_CONNECTED:
-      ASYNC_UDP_LOG(F("ETH Connected"));
-      break;
-
-    case SYSTEM_EVENT_ETH_GOT_IP:
-      if (!eth_connected)
-      {
-        ASYNC_UDP_LOG3(F("ETH MAC: "), ETH.macAddress(), F(", IPv4: "), ETH.localIP());
-
-        if (ETH.fullDuplex())
-        {
-          ASYNC_UDP_LOG0(F("FULL_DUPLEX, "));
-        }
-        else
-        {
-          ASYNC_UDP_LOG0(F("HALF_DUPLEX, "));
-        }
-        
-        ASYNC_UDP_LOG1(ETH.linkSpeed(), F("Mbps"));
-
-        eth_connected = true;
-      }
-
-      break;
-
-    case SYSTEM_EVENT_ETH_DISCONNECTED:
-      ASYNC_UDP_LOG("ETH Disconnected");
-      eth_connected = false;
-      break;
-
-    case SYSTEM_EVENT_ETH_STOP:
-      ASYNC_UDP_LOG("\nETH Stopped");
-      eth_connected = false;
-      break;
-
-    default:
-      break;
-  }
-}
 #endif    // ASYNC_UDP_WT32_ETH01_IMPL_H

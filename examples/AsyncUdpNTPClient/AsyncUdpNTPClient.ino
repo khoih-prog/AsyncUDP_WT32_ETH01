@@ -6,19 +6,12 @@
   Based on and modified from ESPAsyncUDP Library (https://github.com/me-no-dev/ESPAsyncUDP)
   Built by Khoi Hoang https://github.com/khoih-prog/AsyncUDP_WT32_ETH01
   Licensed under MIT license
-
-  Version: 2.0.1
-  
-  Version Modified By   Date      Comments
-  ------- -----------  ---------- -----------
-  2.0.0   K Hoang      10/07/2021 Initial coding for WT32_ETH01. Bump up version to v2.0.0 to sync with AsyncUDP v2.0.0
-  2.0.1   K Hoang      12/07/2021 Update to use WebServer_WT32_ETH01 v1.2.0
  *****************************************************************************************************************************/
 
 #define ASYNC_UDP_WT32_ETH01_DEBUG_PORT      Serial
 
 // Use from 0 to 4. Higher number, more debugging messages and memory usage.
-#define _ASYNC_UDP_WT32_ETH01_LOGLEVEL_      1
+#define _ASYNC_UDP_WT32_ETH01_LOGLEVEL_      2
 
 #include <AsyncUDP_WT32_ETH01.h>
 
@@ -143,7 +136,10 @@ void setup()
 
   Serial.setDebugOutput(true);
 
-  //bool begin(uint8_t phy_addr=ETH_PHY_ADDR, int power=ETH_PHY_POWER, int mdc=ETH_PHY_MDC, int mdio=ETH_PHY_MDIO,
+  // To be called before ETH.begin()
+  WT32_ETH01_onEvent();
+
+  //bool begin(uint8_t phy_addr=ETH_PHY_ADDR, int power=ETH_PHY_POWER, int mdc=ETH_PHY_MDC, int mdio=ETH_PHY_MDIO, 
   //           eth_phy_type_t type=ETH_PHY_TYPE, eth_clock_mode_t clk_mode=ETH_CLK_MODE);
   //ETH.begin(ETH_PHY_ADDR, ETH_PHY_POWER, ETH_PHY_MDC, ETH_PHY_MDIO, ETH_PHY_TYPE, ETH_CLK_MODE);
   ETH.begin(ETH_PHY_ADDR, ETH_PHY_POWER);
@@ -151,8 +147,6 @@ void setup()
   // Static IP, leave without this line to get IP via DHCP
   //bool config(IPAddress local_ip, IPAddress gateway, IPAddress subnet, IPAddress dns1 = 0, IPAddress dns2 = 0);
   ETH.config(myIP, myGW, mySN, myDNS);
-
-  WT32_ETH01_onEvent();
 
   WT32_ETH01_waitForConnect();
 

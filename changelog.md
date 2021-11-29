@@ -12,14 +12,24 @@
 ## Table of Contents
 
 * [Changelog](#changelog)
-  * [Releases v2.0.2](#initial-releases-v202)
-  * [Releases v2.0.1](#initial-releases-v201)
+  * [Releases v2.0.3](#releases-v203)
+  * [Releases v2.0.2](#releases-v202)
+  * [Releases v2.0.1](#releases-v201)
   * [Initial Releases v2.0.0](#initial-releases-v200)
 
 ---
 ---
 
 ## Changelog
+
+### Releases v2.0.3
+
+##### Warning: Releases v2.0.3+ can be used and autodetect ESP32 core v2.0.0+ or v1.0.6- for WT32_ETH01
+
+1. Auto detect ESP32 core to use for WT32_ETH01
+2. Fix bug in WT32_ETH01 examples to reduce connection time
+3. Remove library's redundant code
+
 
 ### Releases v2.0.2
 

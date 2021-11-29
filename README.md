@@ -87,9 +87,9 @@ to apply the better and faster **asynchronous** feature of the **powerful** [Asy
 ## Prerequisites
 
  1. [`Arduino IDE 1.8.16+` for Arduino](https://www.arduino.cc/en/Main/Software)
- 2. [`ESP32 Core 2.0.0+`](https://github.com/espressif/arduino-esp32) for ESP32-based boards. [![Latest release](https://img.shields.io/github/release/espressif/arduino-esp32.svg)](https://github.com/espressif/arduino-esp32/releases/latest/)
+ 2. [`ESP32 Core 2.0.1+`](https://github.com/espressif/arduino-esp32) for ESP32-based boards. [![Latest release](https://img.shields.io/github/release/espressif/arduino-esp32.svg)](https://github.com/espressif/arduino-esp32/releases/latest/)
  
- 3. [`WebServer_WT32_ETH01 library 1.2.1+`](https://github.com/khoih-prog/WebServer_WT32_ETH01). To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebServer_WT32_ETH01.svg?)](https://www.ardu-badge.com/WebServer_WT32_ETH01).
+ 3. [`WebServer_WT32_ETH01 library 1.4.1+`](https://github.com/khoih-prog/WebServer_WT32_ETH01). To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebServer_WT32_ETH01.svg?)](https://www.ardu-badge.com/WebServer_WT32_ETH01).
 ---
 
 ### Installation
@@ -271,7 +271,7 @@ void loop()
 #define ASYNC_UDP_WT32_ETH01_DEBUG_PORT      Serial
 
 // Use from 0 to 4. Higher number, more debugging messages and memory usage.
-#define _ASYNC_UDP_WT32_ETH01_LOGLEVEL_      1
+#define _ASYNC_UDP_WT32_ETH01_LOGLEVEL_      2
 
 #include <AsyncUDP_WT32_ETH01.h>
 
@@ -396,7 +396,10 @@ void setup()
 
   Serial.setDebugOutput(true);
 
-  //bool begin(uint8_t phy_addr=ETH_PHY_ADDR, int power=ETH_PHY_POWER, int mdc=ETH_PHY_MDC, int mdio=ETH_PHY_MDIO,
+  // To be called before ETH.begin()
+  WT32_ETH01_onEvent();
+
+  //bool begin(uint8_t phy_addr=ETH_PHY_ADDR, int power=ETH_PHY_POWER, int mdc=ETH_PHY_MDC, int mdio=ETH_PHY_MDIO, 
   //           eth_phy_type_t type=ETH_PHY_TYPE, eth_clock_mode_t clk_mode=ETH_CLK_MODE);
   //ETH.begin(ETH_PHY_ADDR, ETH_PHY_POWER, ETH_PHY_MDC, ETH_PHY_MDIO, ETH_PHY_TYPE, ETH_CLK_MODE);
   ETH.begin(ETH_PHY_ADDR, ETH_PHY_POWER);
@@ -404,8 +407,6 @@ void setup()
   // Static IP, leave without this line to get IP via DHCP
   //bool config(IPAddress local_ip, IPAddress gateway, IPAddress subnet, IPAddress dns1 = 0, IPAddress dns2 = 0);
   ETH.config(myIP, myGW, mySN, myDNS);
-
-  WT32_ETH01_onEvent();
 
   WT32_ETH01_waitForConnect();
 
@@ -446,42 +447,64 @@ This is terminal debug output when running [AsyncUdpNTPClient](https://github.co
 
 ```
 Starting AsyncUdpNTPClient on ESP32_DEV with ETH_PHY_LAN8720
-WebServer_WT32_ETH01 v1.2.1
-AsyncUdp_WT32_ETH01 v2.0.2
-ETH MAC: A8:03:2A:A1:61:73, IPv4: 192.168.2.232
+WebServer_WT32_ETH01 v1.4.1 for core v2.0.0+
+AsyncUdp_WT32_ETH01 v2.0.3 for core v2.0.0+
+ETH Started
+ETH Connected
+ETH MAC: A8:03:2A:A1:61:73, IPv4: 192.168.2.95
 FULL_DUPLEX, 100Mbps
 AsyncUdpNTPClient started @ IP address: 192.168.2.232
 UDP connected
 ============= createNTPpacket =============
 Received UDP Packet Type: Unicast
-From: 168.61.215.74:123, To: 192.168.2.232:58455, Length: 48
-Seconds since Jan 1 1900 = 3834962406
-Epoch/Unix time = 1625973606
-The UTC/GMT time is Sun 2021-07-11 03:20:06 GMT
+From: 208.81.1.244:123, To: 192.168.2.232:50549, Length: 48
+Seconds since Jan 1 1900 = 3847193050
+Epoch/Unix time = 1638204250
+The UTC/GMT time is Mon 2021-11-29 16:44:10 GMT
 ============= createNTPpacket =============
 Received UDP Packet Type: Unicast
-From: 168.61.215.74:123, To: 192.168.2.232:58455, Length: 48
-Seconds since Jan 1 1900 = 3834962466
-Epoch/Unix time = 1625973666
-The UTC/GMT time is Sun 2021-07-11 03:21:06 GMT
+From: 208.81.1.244:123, To: 192.168.2.232:50549, Length: 48
+Seconds since Jan 1 1900 = 3847193110
+Epoch/Unix time = 1638204310
+The UTC/GMT time is Mon 2021-11-29 16:45:10 GMT
+============= createNTPpacket =============
+Received UDP Packet Type: Unicast
+From: 208.81.1.244:123, To: 192.168.2.232:50549, Length: 48
+Seconds since Jan 1 1900 = 3847193170
+Epoch/Unix time = 1638204370
+The UTC/GMT time is Mon 2021-11-29 16:46:10 GMT
+
 ```
 
 ##### Connect to NTP server time.nist.gov (IP=132.163.96.1)
 
 ```
 Starting AsyncUdpNTPClient on ESP32_DEV with ETH_PHY_LAN8720
-WebServer_WT32_ETH01 v1.2.1
-AsyncUdp_WT32_ETH01 v2.0.2
+WebServer_WT32_ETH01 v1.4.1 for core v2.0.0+
+AsyncUdp_WT32_ETH01 v2.0.3 for core v2.0.0+
 ETH MAC: A8:03:2A:A1:61:73, IPv4: 192.168.2.232
 FULL_DUPLEX, 100Mbps
 AsyncUdpNTPClient started @ IP address: 192.168.2.232
 UDP connected
 ============= createNTPpacket =============
 Received UDP Packet Type: Unicast
-From: 132.163.96.1:123, To: 192.168.2.232:49209, Length: 48
-Seconds since Jan 1 1900 = 3834962553
-Epoch/Unix time = 1625973753
-The UTC/GMT time is Sun 2021-07-11 03:22:33 GMT
+From: 132.163.96.1:123, To: 192.168.2.232:50549, Length: 48
+Seconds since Jan 1 1900 = 3847193590
+Epoch/Unix time = 1638204790
+The UTC/GMT time is Mon 2021-11-29 16:53:10 GMT
+============= createNTPpacket =============
+Received UDP Packet Type: Unicast
+From: 132.163.96.1:123:123, To: 192.168.2.232:50549, Length: 48
+Seconds since Jan 1 1900 = 3847193650
+Epoch/Unix time = 1638204850
+The UTC/GMT time is Mon 2021-11-29 16:54:10 GMT
+============= createNTPpacket =============
+Received UDP Packet Type: Unicast
+From: 132.163.96.1:123:123, To: 192.168.2.232:50549, Length: 48
+Seconds since Jan 1 1900 = 3847193710
+Epoch/Unix time = 1638204910
+The UTC/GMT time is Mon 2021-11-29 16:55:10 GMT
+
 ```
 
 ---
@@ -492,8 +515,8 @@ This is terminal debug output when running [AsyncUDPSendReceive](https://github.
 
 ```
 Starting AsyncUDPSendReceive on ESP32_DEV with ETH_PHY_LAN8720
-WebServer_WT32_ETH01 v1.2.1
-AsyncUdp_WT32_ETH01 v2.0.2
+WebServer_WT32_ETH01 v1.4.1 for core v2.0.0+
+AsyncUdp_WT32_ETH01 v2.0.3 for core v2.0.0+
 ETH MAC: A8:03:2A:A1:61:73, IPv4: 192.168.2.232
 FULL_DUPLEX, 100Mbps
 AsyncUDPSendReceive started @ IP address: 192.168.2.232
@@ -567,6 +590,8 @@ Submit issues to: [AsyncUDP_WT32_ETH01 issues](https://github.com/khoih-prog/Asy
  1. Initial port to to WT32_ETH01 (ESP32 + LAN8720)
  2. Add more examples.
  3. Add debugging features.
+ 4. Auto detect ESP32 core to use for WT32_ETH01
+ 5. Fix bug in WT32_ETH01 examples to reduce connection time
 
 ---
 ---
