@@ -1,6 +1,6 @@
 {
   "name":"AsyncUDP_WT32_ETH01",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description":"Fully Asynchronous UDP Library for WT32_ETH01 (ESP32 + LAN8720). The library is easy to use and includes support for Unicast, Broadcast and Multicast environments.",
   "keywords":"communication, data, async, udp, ntp, time, time-server, server, client, multicast, broadcast, webserver, esp32, esp32-s2, esp32-c3, wt32-eth01, lan8720, lan8720a, udp-server, udp-multicast-server",
   "authors": 
@@ -34,7 +34,7 @@
     {
       "owner": "khoih-prog",
       "name": "WebServer_WT32_ETH01",
-      "version": "^1.4.1",
+      "version": "^1.5.0",
       "platforms": "espressif32"
     }
   ],
@@ -42,5 +42,5 @@
   "frameworks": "*",
   "platforms": ["espressif32"],
   "examples": "examples/*/*/*.ino",
-  "headers": "AsyncUDP_WT32_ETH01.h"
+  "headers": [ "AsyncUDP_WT32_ETH01.h", "AsyncUDP_WT32_ETH01.hpp" ]
 }

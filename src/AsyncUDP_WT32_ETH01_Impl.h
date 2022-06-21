@@ -7,7 +7,7 @@
   Built by Khoi Hoang https://github.com/khoih-prog/AsyncUDP_WT32_ETH01
   Licensed under MIT license
   
-  Version: 2.0.3
+  Version: 2.1.0
   
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -15,6 +15,7 @@
   2.0.1   K Hoang      12/07/2021 Update to use WebServer_WT32_ETH01 v1.2.0
   2.0.2   K Hoang      09/10/2021 Update `platform.ini` and `library.json`
   2.0.3   K Hoang      29/11/2021 Auto detect ESP32 core version. Optimize library code. Fix bug in examples
+  2.1.0   K Hoang      21/06/2022 Fix multiple-definitions linker error
  *****************************************************************************************************************************/
 
 #pragma once

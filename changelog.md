@@ -12,6 +12,7 @@
 ## Table of Contents
 
 * [Changelog](#changelog)
+  * [Releases v2.1.0](#releases-v210)
   * [Releases v2.0.3](#releases-v203)
   * [Releases v2.0.2](#releases-v202)
   * [Releases v2.0.1](#releases-v201)
@@ -21,6 +22,11 @@
 ---
 
 ## Changelog
+
+#### Releases v2.1.0
+
+1. Fix multiple-definitions linker error. Check [Multiple definitions #1](https://github.com/khoih-prog/AsyncUDP_WT32_ETH01/issues/1)
+2. Add example [multiFileProject](examples/multiFileProject) to demo for multiple-file project to avoid `multiple-definitions` linker error
 
 ### Releases v2.0.3
 

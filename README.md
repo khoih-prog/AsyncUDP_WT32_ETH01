@@ -7,14 +7,15 @@
 [![GitHub issues](https://img.shields.io/github/issues/khoih-prog/AsyncUDP_WT32_ETH01.svg)](http://github.com/khoih-prog/AsyncUDP_WT32_ETH01/issues)
 
 
-<a href="https://www.buymeacoffee.com/khoihprog6" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+<a href="https://www.buymeacoffee.com/khoihprog6" title="Donate to my libraries using BuyMeACoffee"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Donate to my libraries using BuyMeACoffee" style="height: 50px !important;width: 181px !important;" ></a>
+<a href="https://www.buymeacoffee.com/khoihprog6" title="Donate to my libraries using BuyMeACoffee"><img src="https://img.shields.io/badge/buy%20me%20a%20coffee-donate-orange.svg?logo=buy-me-a-coffee&logoColor=FFDD00" style="height: 20px !important;width: 200px !important;" ></a>
 
 ---
 ---
 
 ## Table of Contents
 
-
+* [Important Change from v2.1.0](#Important-Change-from-v210)
 * [Why do we need this AsyncUDP_WT32_ETH01 library](#why-do-we-need-this-asyncudp_wt32_eth01-library)
   * [Features](#features)
   * [Why Async is better](#why-async-is-better)
@@ -38,6 +39,7 @@
   * [ 3. AsyncUdpSendReceive](examples/AsyncUdpSendReceive)
   * [ 4. AsyncUDPServer](examples/AsyncUDPServer)
   * [ 5. AsyncUDPMulticastServer](examples/AsyncUDPMulticastServer)
+  * [ 6. **multiFileProject**](examples/multiFileProject) **New**
 * [Example AsyncUdpNTPClient](#example-asyncudpntpclient)
   * [File AsyncUdpNTPClient.ino](#file-asyncudpntpclientino)
 * [Debug Terminal Output Samples](#debug-terminal-output-samples)
@@ -52,6 +54,15 @@
 * [Contributing](#contributing)
 * [License](#license)
 * [Copyright](#copyright)
+
+
+---
+---
+
+### Important Change from v2.1.0
+
+Please have a look at [HOWTO Fix `Multiple Definitions` Linker Error](#howto-fix-multiple-definitions-linker-error)
+
 
 ---
 ---
@@ -89,10 +100,10 @@ to apply the better and faster **asynchronous** feature of the **powerful** [Asy
 
 ## Prerequisites
 
- 1. [`Arduino IDE 1.8.19+` for Arduino](https://github.com/arduino/Arduino). [![GitHub release](https://img.shields.io/github/release/arduino/Arduino.svg)](https://github.com/arduino/Arduino/releases/latest)
- 2. [`ESP32 Core 2.0.2+`](https://github.com/espressif/arduino-esp32) for ESP32-based boards. [![Latest release](https://img.shields.io/github/release/espressif/arduino-esp32.svg)](https://github.com/espressif/arduino-esp32/releases/latest/)
+ 1. [`Arduino IDE 1.8.16+` for Arduino](https://www.arduino.cc/en/Main/Software)
+ 2. [`ESP32 Core 2.0.3+`](https://github.com/espressif/arduino-esp32) for ESP32-based boards. [![Latest release](https://img.shields.io/github/release/espressif/arduino-esp32.svg)](https://github.com/espressif/arduino-esp32/releases/latest/)
  
- 3. [`WebServer_WT32_ETH01 library 1.4.1+`](https://github.com/khoih-prog/WebServer_WT32_ETH01). To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebServer_WT32_ETH01.svg?)](https://www.ardu-badge.com/WebServer_WT32_ETH01).
+ 3. [`WebServer_WT32_ETH01 library 1.5.0+`](https://github.com/khoih-prog/WebServer_WT32_ETH01). To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebServer_WT32_ETH01.svg?)](https://www.ardu-badge.com/WebServer_WT32_ETH01).
 ---
 
 ### Installation
@@ -114,7 +125,7 @@ The best way is to use `Arduino Library Manager`. Search for `AsyncUDP_WT32_ETH0
 
 1. Install [VS Code](https://code.visualstudio.com/)
 2. Install [PlatformIO](https://platformio.org/platformio-ide)
-3. Install [**AsyncUDP_WT32_ETH01** library](https://platformio.org/lib/show/12542/AsyncUDP_WT32_ETH01) by using [Library Manager](https://platformio.org/lib/show/12542/AsyncUDP_WT32_ETH01/installation). Search for AsyncUDP_WT32_ETH01 in [Platform.io Author's Libraries](https://platformio.org/lib/search?query=author:%22Khoi%20Hoang%22)
+3. Install [**AsyncUDP_WT32_ETH01** library](https://registry.platformio.org/libraries/AsyncUDP_WT32_ETH01) by using [Library Manager](https://registry.platformio.org/libraries/AsyncUDP_WT32_ETH01/installation). Search for AsyncUDP_WT32_ETH01 in [Platform.io Author's Libraries](https://platformio.org/lib/search?query=author:%22Khoi%20Hoang%22)
 4. Use included [platformio.ini](platformio/platformio.ini) file from examples to ensure that all dependent libraries will installed automatically. Please visit documentation for the other options and examples at [Project Configuration File](https://docs.platformio.org/page/projectconf.html)
 
 ---
@@ -127,6 +138,33 @@ The best way is to use `Arduino Library Manager`. Search for `AsyncUDP_WT32_ETH0
 
 To fix [`ESP32 compile error`](https://github.com/espressif/arduino-esp32), just copy the following file into the [`ESP32`](https://github.com/espressif/arduino-esp32) cores/esp32 directory (e.g. ./arduino-1.8.15/hardware/espressif/cores/esp32) to overwrite the old file:
 - [Server.h](LibraryPatches/esp32/cores/esp32/Server.h)
+
+
+
+---
+---
+
+
+### HOWTO Fix `Multiple Definitions` Linker Error
+
+The current library implementation, using `xyz-Impl.h` instead of standard `xyz.cpp`, possibly creates certain `Multiple Definitions` Linker error in certain use cases.
+
+You can include this `.hpp` file
+
+```
+// Can be included as many times as necessary, without `Multiple Definitions` Linker Error
+#include "AsyncUDP_WT32_ETH01.hpp"     //https://github.com/khoih-prog/AsyncUDP_WT32_ETH01
+```
+
+in many files. But be sure to use the following `.h` file **in just 1 `.h`, `.cpp` or `.ino` file**, which must **not be included in any other file**, to avoid `Multiple Definitions` Linker Error
+
+```
+// To be included only in main(), .ino with setup() to avoid `Multiple Definitions` Linker Error
+#include "AsyncUDP_WT32_ETH01.h"       //https://github.com/khoih-prog/AsyncUDP_WT32_ETH01
+```
+
+Check the new [**multiFileProject** example](examples/multiFileProject) for a `HOWTO` demo.
+
 
 
 ---
@@ -262,181 +300,14 @@ void loop()
  3. [AsyncUdpSendReceive](examples/AsyncUdpSendReceive) 
  4. [AsyncUDPServer](examples/AsyncUDPServer)
  5. [AsyncUDPMulticastServer](examples/AsyncUDPMulticastServer)
-
+ 6. [**multiFileProject**](examples/multiFileProject) **New**
 ---
 
 ### Example [AsyncUdpNTPClient](examples/AsyncUdpNTPClient)
 
 #### File [AsyncUdpNTPClient.ino](examples/AsyncUdpNTPClient/AsyncUdpNTPClient.ino)
 
-
-```cpp
-#define ASYNC_UDP_WT32_ETH01_DEBUG_PORT      Serial
-
-// Use from 0 to 4. Higher number, more debugging messages and memory usage.
-#define _ASYNC_UDP_WT32_ETH01_LOGLEVEL_      2
-
-#include <AsyncUDP_WT32_ETH01.h>
-
-/////////////////////////////////////////////
-
-// Select the IP address according to your local network
-IPAddress myIP(192, 168, 2, 232);
-IPAddress myGW(192, 168, 2, 1);
-IPAddress mySN(255, 255, 255, 0);
-
-// Google DNS Server IP
-IPAddress myDNS(8, 8, 8, 8);
-
-/////////////////////////////////////////////
-
-#include <time.h>
-
-// 0.ca.pool.ntp.org
-IPAddress timeServerIP = IPAddress(208, 81, 1, 244);
-// time.nist.gov
-//IPAddress timeServerIP = IPAddress(132, 163, 96, 1);
-
-#define NTP_REQUEST_PORT      123
-
-const int NTP_PACKET_SIZE = 48;       // NTP timestamp is in the first 48 bytes of the message
-
-byte packetBuffer[NTP_PACKET_SIZE];   // buffer to hold incoming and outgoing packets
-
-// A UDP instance to let us send and receive packets over UDP
-AsyncUDP Udp;
-
-// send an NTP request to the time server at the given address
-void createNTPpacket(void)
-{
-  Serial.println("============= createNTPpacket =============");
-
-  // set all bytes in the buffer to 0
-  memset(packetBuffer, 0, NTP_PACKET_SIZE);
-  // Initialize values needed to form NTP request
-  // (see URL above for details on the packets)
-
-  packetBuffer[0]   = 0b11100011;   // LI, Version, Mode
-  packetBuffer[1]   = 0;     // Stratum, or type of clock
-  packetBuffer[2]   = 6;     // Polling Interval
-  packetBuffer[3]   = 0xEC;  // Peer Clock Precision
-  
-  // 8 bytes of zero for Root Delay & Root Dispersion
-  packetBuffer[12]  = 49;
-  packetBuffer[13]  = 0x4E;
-  packetBuffer[14]  = 49;
-  packetBuffer[15]  = 52;
-}
-
-void parsePacket(AsyncUDPPacket packet)
-{
-  struct tm  ts;
-  char       buf[80];
-  
-  memcpy(packetBuffer, packet.data(), sizeof(packetBuffer));
-
-  Serial.print("Received UDP Packet Type: ");
-  Serial.println(packet.isBroadcast() ? "Broadcast" : packet.isMulticast() ? "Multicast" : "Unicast");
-  Serial.print("From: ");
-  Serial.print(packet.remoteIP());
-  Serial.print(":");
-  Serial.print(packet.remotePort());
-  Serial.print(", To: ");
-  Serial.print(packet.localIP());
-  Serial.print(":");
-  Serial.print(packet.localPort());
-  Serial.print(", Length: ");
-  Serial.print(packet.length());
-  Serial.println();
-
-  unsigned long highWord = word(packetBuffer[40], packetBuffer[41]);
-  unsigned long lowWord = word(packetBuffer[42], packetBuffer[43]);
-
-  // combine the four bytes (two words) into a long integer
-  // this is NTP time (seconds since Jan 1 1900):
-  unsigned long secsSince1900 = highWord << 16 | lowWord;
-  
-  Serial.print(F("Seconds since Jan 1 1900 = "));
-  Serial.println(secsSince1900);
-
-  // now convert NTP time into )everyday time:
-  Serial.print(F("Epoch/Unix time = "));
-  
-  // Unix time starts on Jan 1 1970. In seconds, that's 2208988800:
-  const unsigned long seventyYears = 2208988800UL;
-  
-  // subtract seventy years:
-  unsigned long epoch = secsSince1900 - seventyYears;
-  time_t epoch_t = epoch;   //secsSince1900 - seventyYears;
- 
-  // print Unix time:
-  Serial.println(epoch);
-
-  // print the hour, minute and second:
-  Serial.print(F("The UTC/GMT time is "));       // UTC is the time at Greenwich Meridian (GMT)
-
-  ts = *localtime(&epoch_t);
-  strftime(buf, sizeof(buf), "%a %Y-%m-%d %H:%M:%S %Z", &ts);
-  Serial.println(buf);
-}
-
-void sendNTPPacket(void)
-{
-  createNTPpacket();
-  //Send unicast
-  Udp.write(packetBuffer, sizeof(packetBuffer));
-}
-
-void setup()
-{
-  Serial.begin(115200);
-  while (!Serial);
-
-  Serial.print("\nStarting AsyncUdpNTPClient on " + String(ARDUINO_BOARD));
-  Serial.println(" with " + String(SHIELD_TYPE));
-  Serial.println(WEBSERVER_WT32_ETH01_VERSION);
-  Serial.println(ASYNC_UDP_WT32_ETH01_VERSION);
-
-  Serial.setDebugOutput(true);
-
-  // To be called before ETH.begin()
-  WT32_ETH01_onEvent();
-
-  //bool begin(uint8_t phy_addr=ETH_PHY_ADDR, int power=ETH_PHY_POWER, int mdc=ETH_PHY_MDC, int mdio=ETH_PHY_MDIO, 
-  //           eth_phy_type_t type=ETH_PHY_TYPE, eth_clock_mode_t clk_mode=ETH_CLK_MODE);
-  //ETH.begin(ETH_PHY_ADDR, ETH_PHY_POWER, ETH_PHY_MDC, ETH_PHY_MDIO, ETH_PHY_TYPE, ETH_CLK_MODE);
-  ETH.begin(ETH_PHY_ADDR, ETH_PHY_POWER);
-
-  // Static IP, leave without this line to get IP via DHCP
-  //bool config(IPAddress local_ip, IPAddress gateway, IPAddress subnet, IPAddress dns1 = 0, IPAddress dns2 = 0);
-  ETH.config(myIP, myGW, mySN, myDNS);
-
-  WT32_ETH01_waitForConnect();
-
-  // Client address
-  Serial.print("AsyncUdpNTPClient started @ IP address: ");
-  Serial.println(ETH.localIP());
-
-  //NTP requests are to port NTP_REQUEST_PORT = 123
-  if (Udp.connect(timeServerIP, NTP_REQUEST_PORT))
-  {
-    Serial.println("UDP connected");
-
-    Udp.onPacket([](AsyncUDPPacket packet)
-    {
-      parsePacket(packet);
-    });
-  }
-}
-
-void loop()
-{
-  sendNTPPacket();
-
-  // wait 60 seconds before asking for the time again
-  delay(60000);
-}
-```
+https://github.com/khoih-prog/AsyncUDP_Teensy41/blob/79a2019f3482e6902406bacffd483bcdf6921195/examples/AsyncUdpNTPClient/AsyncUdpNTPClient.ino#L12-L199
 
 ---
 
@@ -450,8 +321,8 @@ This is terminal debug output when running [AsyncUdpNTPClient](https://github.co
 
 ```
 Starting AsyncUdpNTPClient on ESP32_DEV with ETH_PHY_LAN8720
-WebServer_WT32_ETH01 v1.4.1 for core v2.0.0+
-AsyncUdp_WT32_ETH01 v2.0.3 for core v2.0.0+
+WebServer_WT32_ETH01 v1.5.0 for core v2.0.0+
+AsyncUdp_WT32_ETH01 v2.1.0 for core v2.0.0+
 ETH Started
 ETH Connected
 ETH MAC: A8:03:2A:A1:61:73, IPv4: 192.168.2.95
@@ -483,8 +354,8 @@ The UTC/GMT time is Mon 2021-11-29 16:46:10 GMT
 
 ```
 Starting AsyncUdpNTPClient on ESP32_DEV with ETH_PHY_LAN8720
-WebServer_WT32_ETH01 v1.4.1 for core v2.0.0+
-AsyncUdp_WT32_ETH01 v2.0.3 for core v2.0.0+
+WebServer_WT32_ETH01 v1.5.0 for core v2.0.0+
+AsyncUdp_WT32_ETH01 v2.1.0 for core v2.0.0+
 ETH MAC: A8:03:2A:A1:61:73, IPv4: 192.168.2.232
 FULL_DUPLEX, 100Mbps
 AsyncUdpNTPClient started @ IP address: 192.168.2.232
@@ -518,8 +389,8 @@ This is terminal debug output when running [AsyncUDPSendReceive](https://github.
 
 ```
 Starting AsyncUDPSendReceive on ESP32_DEV with ETH_PHY_LAN8720
-WebServer_WT32_ETH01 v1.4.1 for core v2.0.0+
-AsyncUdp_WT32_ETH01 v2.0.3 for core v2.0.0+
+WebServer_WT32_ETH01 v1.5.0 for core v2.0.0+
+AsyncUdp_WT32_ETH01 v2.1.0 for core v2.0.0+
 ETH MAC: A8:03:2A:A1:61:73, IPv4: 192.168.2.232
 FULL_DUPLEX, 100Mbps
 AsyncUDPSendReceive started @ IP address: 192.168.2.232
@@ -595,7 +466,10 @@ Submit issues to: [AsyncUDP_WT32_ETH01 issues](https://github.com/khoih-prog/Asy
  3. Add debugging features.
  4. Auto detect ESP32 core to use for WT32_ETH01
  5. Fix bug in WT32_ETH01 examples to reduce connection time
-
+ 6. Fix `multiple-definitions` linker error.
+ 7. Add example [multiFileProject](examples/multiFileProject) to demo for multiple-file project
+ 
+ 
 ---
 ---
 
