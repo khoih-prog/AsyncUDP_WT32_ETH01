@@ -28,6 +28,7 @@
   * [VS Code & PlatformIO](#vs-code--platformio)
 * [Libraries' Patches](#libraries-patches)
   * [1. For fixing ESP32 compile error](#1-for-fixing-esp32-compile-error)
+* [HOWTO Fix `Multiple Definitions` Linker Error](#howto-fix-multiple-definitions-linker-error) 
 * [HOWTO Use analogRead() with ESP32 running WiFi and/or BlueTooth (BT/BLE)](#howto-use-analogread-with-esp32-running-wifi-andor-bluetooth-btble)
   * [1. ESP32 has 2 ADCs, named ADC1 and ADC2](#1--esp32-has-2-adcs-named-adc1-and-adc2)
   * [2. ESP32 ADCs functions](#2-esp32-adcs-functions)
