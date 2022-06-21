@@ -307,7 +307,7 @@ void loop()
 
 #### File [AsyncUdpNTPClient.ino](examples/AsyncUdpNTPClient/AsyncUdpNTPClient.ino)
 
-https://github.com/khoih-prog/AsyncUDP_Teensy41/blob/79a2019f3482e6902406bacffd483bcdf6921195/examples/AsyncUdpNTPClient/AsyncUdpNTPClient.ino#L12-L199
+https://github.com/khoih-prog/AsyncUDP_WT32_ETH01/blob/38f14694c93ca0a393adfeffaee0027924a7e545/examples/AsyncUdpNTPClient/AsyncUdpNTPClient.ino#L11-L175
 
 ---
 
