@@ -1,4 +1,4 @@
-# AsyncUDP_WT32_ETH01
+# AsyncUDP_WT32_ETH01 Library
 
 
 [![arduino-library-badge](https://www.ardu-badge.com/badge/AsyncUDP_WT32_ETH01.svg?)](https://www.ardu-badge.com/AsyncUDP_WT32_ETH01)
@@ -9,6 +9,9 @@
 
 <a href="https://www.buymeacoffee.com/khoihprog6" title="Donate to my libraries using BuyMeACoffee"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Donate to my libraries using BuyMeACoffee" style="height: 50px !important;width: 181px !important;" ></a>
 <a href="https://www.buymeacoffee.com/khoihprog6" title="Donate to my libraries using BuyMeACoffee"><img src="https://img.shields.io/badge/buy%20me%20a%20coffee-donate-orange.svg?logo=buy-me-a-coffee&logoColor=FFDD00" style="height: 20px !important;width: 200px !important;" ></a>
+<a href="https://profile-counter.glitch.me/khoih-prog/count.svg" title="Total khoih-prog Visitor count"><img src="https://profile-counter.glitch.me/khoih-prog/count.svg" style="height: 30px;width: 200px;"></a>
+<a href="https://profile-counter.glitch.me/khoih-prog-AsyncUDP_WT32_ETH01/count.svg" title="AsyncUDP_WT32_ETH01 Visitor count"><img src="https://profile-counter.glitch.me/khoih-prog-AsyncUDP_WT32_ETH01/count.svg" style="height: 30px;width: 200px;"></a>
+
 
 ---
 ---
@@ -101,10 +104,10 @@ to apply the better and faster **asynchronous** feature of the **powerful** [Asy
 
 ## Prerequisites
 
- 1. [`Arduino IDE 1.8.16+` for Arduino](https://www.arduino.cc/en/Main/Software)
- 2. [`ESP32 Core 2.0.3+`](https://github.com/espressif/arduino-esp32) for ESP32-based boards. [![Latest release](https://img.shields.io/github/release/espressif/arduino-esp32.svg)](https://github.com/espressif/arduino-esp32/releases/latest/)
+ 1. [`Arduino IDE 1.8.19+` for Arduino](https://github.com/arduino/Arduino). [![GitHub release](https://img.shields.io/github/release/arduino/Arduino.svg)](https://github.com/arduino/Arduino/releases/latest)
+ 2. [`ESP32 Core 2.0.5+`](https://github.com/espressif/arduino-esp32) for ESP32-based boards. [![Latest release](https://img.shields.io/github/release/espressif/arduino-esp32.svg)](https://github.com/espressif/arduino-esp32/releases/latest/)
  
- 3. [`WebServer_WT32_ETH01 library 1.5.0+`](https://github.com/khoih-prog/WebServer_WT32_ETH01). To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebServer_WT32_ETH01.svg?)](https://www.ardu-badge.com/WebServer_WT32_ETH01).
+ 3. [`WebServer_WT32_ETH01 library 1.5.1+`](https://github.com/khoih-prog/WebServer_WT32_ETH01). To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebServer_WT32_ETH01.svg?)](https://www.ardu-badge.com/WebServer_WT32_ETH01).
 ---
 
 ### Installation
@@ -118,9 +121,9 @@ The best way is to use `Arduino Library Manager`. Search for `AsyncUDP_WT32_ETH0
 ### Manual Install
 
 1. Navigate to [AsyncUDP_WT32_ETH01](https://github.com/khoih-prog/AsyncUDP_WT32_ETH01) page.
-2. Download the latest release `AsyncUDP_WT32_ETH01-master.zip`.
-3. Extract the zip file to `AsyncUDP_WT32_ETH01-master` directory 
-4. Copy the whole `AsyncUDP_WT32_ETH01-master` folder to Arduino libraries' directory such as `~/Arduino/libraries/`.
+2. Download the latest release `AsyncUDP_WT32_ETH01-main.zip`.
+3. Extract the zip file to `AsyncUDP_WT32_ETH01-main` directory 
+4. Copy the whole `AsyncUDP_WT32_ETH01-main` folder to Arduino libraries' directory such as `~/Arduino/libraries/`.
 
 ### VS Code & PlatformIO:
 
@@ -141,7 +144,6 @@ To fix [`ESP32 compile error`](https://github.com/espressif/arduino-esp32), just
 - [Server.h](LibraryPatches/esp32/cores/esp32/Server.h)
 
 
-
 ---
 ---
 
@@ -152,14 +154,14 @@ The current library implementation, using `xyz-Impl.h` instead of standard `xyz.
 
 You can include this `.hpp` file
 
-```
+```cpp
 // Can be included as many times as necessary, without `Multiple Definitions` Linker Error
 #include "AsyncUDP_WT32_ETH01.hpp"     //https://github.com/khoih-prog/AsyncUDP_WT32_ETH01
 ```
 
 in many files. But be sure to use the following `.h` file **in just 1 `.h`, `.cpp` or `.ino` file**, which must **not be included in any other file**, to avoid `Multiple Definitions` Linker Error
 
-```
+```cpp
 // To be included only in main(), .ino with setup() to avoid `Multiple Definitions` Linker Error
 #include "AsyncUDP_WT32_ETH01.h"       //https://github.com/khoih-prog/AsyncUDP_WT32_ETH01
 ```
@@ -320,9 +322,9 @@ This is terminal debug output when running [AsyncUdpNTPClient](https://github.co
 
 ##### Connect to NTP server time.windows.com (IP=168.61.215.74)
 
-```
+```cpp
 Starting AsyncUdpNTPClient on ESP32_DEV with ETH_PHY_LAN8720
-WebServer_WT32_ETH01 v1.5.0 for core v2.0.0+
+WebServer_WT32_ETH01 v1.5.1 for core v2.0.0+
 AsyncUdp_WT32_ETH01 v2.1.0 for core v2.0.0+
 ETH Started
 ETH Connected
@@ -353,9 +355,9 @@ The UTC/GMT time is Mon 2021-11-29 16:46:10 GMT
 
 ##### Connect to NTP server time.nist.gov (IP=132.163.96.1)
 
-```
+```cpp
 Starting AsyncUdpNTPClient on ESP32_DEV with ETH_PHY_LAN8720
-WebServer_WT32_ETH01 v1.5.0 for core v2.0.0+
+WebServer_WT32_ETH01 v1.5.1 for core v2.0.0+
 AsyncUdp_WT32_ETH01 v2.1.0 for core v2.0.0+
 ETH MAC: A8:03:2A:A1:61:73, IPv4: 192.168.2.232
 FULL_DUPLEX, 100Mbps
@@ -388,9 +390,9 @@ The UTC/GMT time is Mon 2021-11-29 16:55:10 GMT
 
 This is terminal debug output when running [AsyncUDPSendReceive](https://github.com/khoih-prog/AsyncUDP_WT32_ETH01/tree/main/examples/AsyncUdpSendReceive) on **WT32_ETH01 (ESP32 + LAN8720)**. It connects to NTP Server `time.nist.gov` (IP=132.163.96.1) using AsyncUDP_WT32_ETH01 library, and requests NTP time every 60s. The packet is **received and processed asynchronously** to print current UTC/GMT time. The ACK packet is then sent.
 
-```
+```cpp
 Starting AsyncUDPSendReceive on ESP32_DEV with ETH_PHY_LAN8720
-WebServer_WT32_ETH01 v1.5.0 for core v2.0.0+
+WebServer_WT32_ETH01 v1.5.1 for core v2.0.0+
 AsyncUdp_WT32_ETH01 v2.1.0 for core v2.0.0+
 ETH MAC: A8:03:2A:A1:61:73, IPv4: 192.168.2.232
 FULL_DUPLEX, 100Mbps
@@ -506,8 +508,8 @@ If you want to contribute to this project:
 
 ## Copyright
 
-Copyright 2018- Hristo Gochkov
+Copyright (c) 2018- Hristo Gochkov
 
-Copyright 2021- Khoi Hoang
+Copyright (c) 2021- Khoi Hoang
 
 

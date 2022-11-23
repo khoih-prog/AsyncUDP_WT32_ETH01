@@ -1,14 +1,14 @@
 /****************************************************************************************************************************
   AsyncUdp_WT32_ETH01_Impl.h
-  
+
   AsyncUDP_WT32_ETH01 is a Async UDP library for the WT32_ETH01 (ESP32 + LAN8720)
-  
+
   Based on and modified from ESPAsyncUDP Library (https://github.com/me-no-dev/ESPAsyncUDP)
   Built by Khoi Hoang https://github.com/khoih-prog/AsyncUDP_WT32_ETH01
   Licensed under MIT license
-  
+
   Version: 2.1.0
-  
+
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
   2.0.0   K Hoang      10/07/2021 Initial coding for WT32_ETH01. Bump up version to v2.0.0 to sync with AsyncUDP v2.0.0
@@ -25,15 +25,15 @@
 
 extern "C"
 {
-  #include "lwip/opt.h"
-  #include "lwip/inet.h"
-  #include "lwip/udp.h"
-  #include "lwip/igmp.h"
-  #include "lwip/ip_addr.h"
-  #include "lwip/mld6.h"
-  #include "lwip/prot/ethernet.h"
-  #include <esp_err.h>
-  #include <esp_wifi.h>
+#include "lwip/opt.h"
+#include "lwip/inet.h"
+#include "lwip/udp.h"
+#include "lwip/igmp.h"
+#include "lwip/ip_addr.h"
+#include "lwip/mld6.h"
+#include "lwip/prot/ethernet.h"
+#include <esp_err.h>
+#include <esp_wifi.h>
 }
 
 #include "lwip/priv/tcpip_priv.h"
@@ -76,9 +76,9 @@ static err_t _udp_connect_api(struct tcpip_api_call_data *api_call_msg)
 {
   udp_api_call_t * msg = (udp_api_call_t *)api_call_msg;
   msg->err = udp_connect(msg->pcb, msg->addr, msg->port);
-  
+
   UDP_LOGDEBUG1(F("_udp_connect_api: Error ="), msg->err);
-  
+
   return msg->err;
 }
 
@@ -89,9 +89,9 @@ static err_t _udp_connect(struct udp_pcb *pcb, const ip_addr_t *addr, u16_t port
   msg.addr = addr;
   msg.port = port;
   tcpip_api_call(_udp_connect_api, (struct tcpip_api_call_data*)&msg);
-  
+
   UDP_LOGDEBUG1(F("_udp_connect: Error ="), msg.err);
-  
+
   return msg.err;
 }
 
@@ -100,13 +100,13 @@ static err_t _udp_disconnect_api(struct tcpip_api_call_data *api_call_msg)
   udp_api_call_t * msg = (udp_api_call_t *)api_call_msg;
   msg->err = 0;
   udp_disconnect(msg->pcb);
-  
+
   UDP_LOGDEBUG1(F("_udp_disconnect_api: Error ="), msg->err);
-  
+
   return msg->err;
 }
 
-static void  _udp_disconnect(struct udp_pcb *pcb) 
+static void  _udp_disconnect(struct udp_pcb *pcb)
 {
   udp_api_call_t msg;
   msg.pcb = pcb;
@@ -118,9 +118,9 @@ static err_t _udp_remove_api(struct tcpip_api_call_data *api_call_msg)
   udp_api_call_t * msg = (udp_api_call_t *)api_call_msg;
   msg->err = 0;
   udp_remove(msg->pcb);
-  
+
   UDP_LOGDEBUG1(F("_udp_remove_api: Error ="), msg->err);
-  
+
   return msg->err;
 }
 
@@ -131,13 +131,13 @@ static void  _udp_remove(struct udp_pcb *pcb)
   tcpip_api_call(_udp_remove_api, (struct tcpip_api_call_data*)&msg);
 }
 
-static err_t _udp_bind_api(struct tcpip_api_call_data *api_call_msg) 
+static err_t _udp_bind_api(struct tcpip_api_call_data *api_call_msg)
 {
   udp_api_call_t * msg = (udp_api_call_t *)api_call_msg;
   msg->err = udp_bind(msg->pcb, msg->addr, msg->port);
-  
+
   UDP_LOGDEBUG1(F("_udp_bind_api: Error ="), msg->err);
-  
+
   return msg->err;
 }
 
@@ -148,19 +148,19 @@ static err_t _udp_bind(struct udp_pcb *pcb, const ip_addr_t *addr, u16_t port)
   msg.addr = addr;
   msg.port = port;
   tcpip_api_call(_udp_bind_api, (struct tcpip_api_call_data*)&msg);
-  
+
   UDP_LOGDEBUG1(F("_udp_bind: Error ="), msg.err);
-  
+
   return msg.err;
 }
 
-static err_t _udp_sendto_api(struct tcpip_api_call_data *api_call_msg) 
+static err_t _udp_sendto_api(struct tcpip_api_call_data *api_call_msg)
 {
   udp_api_call_t * msg = (udp_api_call_t *)api_call_msg;
   msg->err = udp_sendto(msg->pcb, msg->pb, msg->addr, msg->port);
-  
+
   UDP_LOGDEBUG1(F("_udp_sendto_api: Error ="), msg->err);
-  
+
   return msg->err;
 }
 
@@ -172,9 +172,9 @@ static err_t _udp_sendto(struct udp_pcb *pcb, struct pbuf *pb, const ip_addr_t *
   msg.port = port;
   msg.pb = pb;
   tcpip_api_call(_udp_sendto_api, (struct tcpip_api_call_data*)&msg);
-  
+
   UDP_LOGDEBUG1(F("_udp_sendto: Error ="), msg.err);
-  
+
   return msg.err;
 }
 
@@ -182,13 +182,14 @@ static err_t _udp_sendto_if_api(struct tcpip_api_call_data *api_call_msg)
 {
   udp_api_call_t * msg = (udp_api_call_t *)api_call_msg;
   msg->err = udp_sendto_if(msg->pcb, msg->pb, msg->addr, msg->port, msg->netif);
-  
+
   UDP_LOGDEBUG1(F("_udp_sendto_if_api: Error ="), msg->err);
-  
+
   return msg->err;
 }
 
-static err_t _udp_sendto_if(struct udp_pcb *pcb, struct pbuf *pb, const ip_addr_t *addr, u16_t port, struct netif *netif)
+static err_t _udp_sendto_if(struct udp_pcb *pcb, struct pbuf *pb, const ip_addr_t *addr, u16_t port,
+                            struct netif *netif)
 {
   udp_api_call_t msg;
   msg.pcb = pcb;
@@ -197,9 +198,9 @@ static err_t _udp_sendto_if(struct udp_pcb *pcb, struct pbuf *pb, const ip_addr_
   msg.pb = pb;
   msg.netif = netif;
   tcpip_api_call(_udp_sendto_if_api, (struct tcpip_api_call_data*)&msg);
-  
+
   UDP_LOGDEBUG1(F("_udp_sendto_if: Error ="), msg.err);
-  
+
   return msg.err;
 }
 
@@ -255,7 +256,8 @@ static bool _udp_task_start()
 
   if (!_udp_task_handle)
   {
-    xTaskCreateUniversal(_udp_task, "async_udp", 4096, NULL, CONFIG_ARDUINO_UDP_TASK_PRIORITY, (TaskHandle_t*)&_udp_task_handle, CONFIG_ARDUINO_UDP_RUNNING_CORE);
+    xTaskCreateUniversal(_udp_task, "async_udp", 4096, NULL, CONFIG_ARDUINO_UDP_TASK_PRIORITY,
+                         (TaskHandle_t*)&_udp_task_handle, CONFIG_ARDUINO_UDP_RUNNING_CORE);
 
     if (!_udp_task_handle)
     {
@@ -290,7 +292,7 @@ static bool _udp_task_post(void *arg, udp_pcb *pcb, pbuf *pb, const ip_addr_t *a
   if (xQueueSend(_udp_queue, &e, portMAX_DELAY) != pdPASS)
   {
     free((void*)(e));
-    
+
     return false;
   }
 
@@ -304,8 +306,8 @@ static void _udp_recv(void *arg, udp_pcb *pcb, pbuf *pb, const ip_addr_t *addr, 
     pbuf * this_pb = pb;
     pb = pb->next;
     this_pb->next = NULL;
-    
-    if (!_udp_task_post(arg, pcb, this_pb, addr, port, ip_current_input_netif())) 
+
+    if (!_udp_task_post(arg, pcb, this_pb, addr, port, ip_current_input_netif()))
     {
       pbuf_free(this_pb);
     }
@@ -333,7 +335,7 @@ static void _udp_recv(void *arg, udp_pcb *pcb, pbuf *pb, const ip_addr_t *addr, 
       {
         pbuf_free(e->pb);
       }
-      
+
       free((void*)(e));
     }
 
@@ -379,7 +381,7 @@ size_t AsyncUDPMessage::write(const uint8_t *data, size_t len)
   if (_buffer == NULL)
   {
     UDP_LOGDEBUG(F("write: Error NULL _buffer"));
-    
+
     return 0;
   }
 
@@ -410,7 +412,7 @@ size_t AsyncUDPMessage::space()
   if (_buffer == NULL)
   {
     UDP_LOGDEBUG(F("space: Error NULL _buffer"));
-    
+
     return 0;
   }
 
@@ -440,7 +442,7 @@ void AsyncUDPMessage::flush()
 
 ////////////////////////////////////////////////
 
-AsyncUDPPacket::AsyncUDPPacket(AsyncUDPPacket &packet) 
+AsyncUDPPacket::AsyncUDPPacket(AsyncUDPPacket &packet)
 {
   _udp    = packet._udp;
   _pb     = packet._pb;
@@ -604,11 +606,11 @@ tcpip_adapter_if_t AsyncUDPPacket::interface()
 
 IPAddress AsyncUDPPacket::localIP()
 {
-  if (_localIp.type != IPADDR_TYPE_V4) 
+  if (_localIp.type != IPADDR_TYPE_V4)
   {
     return IPAddress();
   }
-  
+
   return IPAddress(_localIp.u_addr.ip4.addr);
 }
 
@@ -704,7 +706,7 @@ size_t AsyncUDPPacket::write(const uint8_t *data, size_t len)
   if (!data)
   {
     UDP_LOGDEBUG(F("AsyncUDPPacket::write: Error NULL data"));
-    
+
     return 0;
   }
 
@@ -743,7 +745,7 @@ bool AsyncUDP::_init()
 
   //_lock = xSemaphoreCreateMutex();
   udp_recv(_pcb, &_udp_recv, (void *) this);
-  
+
   return true;
 }
 
@@ -763,11 +765,11 @@ AsyncUDP::~AsyncUDP()
 {
   close();
   UDP_MUTEX_LOCK();
-  
+
   udp_recv(_pcb, NULL, NULL);
   _udp_remove(_pcb);
   _pcb = NULL;
-  
+
   UDP_MUTEX_UNLOCK();
   //vSemaphoreDelete(_lock);
 }
@@ -800,33 +802,33 @@ bool AsyncUDP::connect(const ip_addr_t *addr, uint16_t port)
   {
     log_e("failed to start task");
     UDP_LOGERROR(F("AsyncUDP::connect: failed to start task"));
-    
+
     return false;
   }
 
   if (!_init())
   {
     UDP_LOGERROR(F("AsyncUDP::connect: failed to init"));
-    
+
     return false;
   }
 
   close();
   UDP_MUTEX_LOCK();
-  
+
   _lastErr = _udp_connect(_pcb, addr, port);
 
   if (_lastErr != ERR_OK)
   {
     UDP_MUTEX_UNLOCK();
-    
+
     UDP_LOGERROR(F("AsyncUDP::connect: _udp_connect failed"));
-    
+
     return false;
   }
 
   _connected = true;
-  
+
   UDP_MUTEX_UNLOCK();
 
   return true;
@@ -840,17 +842,17 @@ bool AsyncUDP::listen(const ip_addr_t *addr, uint16_t port)
   {
     log_e("failed to start task");
     UDP_LOGERROR(F("AsyncUDP::listen: failed to start task"));
-    
+
     return false;
   }
 
   if (!_init())
   {
     UDP_LOGERROR(F("AsyncUDP::listen: failed to init"));
-    
+
     return false;
   }
-  
+
   close();
 
   if (addr)
@@ -864,14 +866,14 @@ bool AsyncUDP::listen(const ip_addr_t *addr, uint16_t port)
   if (_udp_bind(_pcb, addr, port) != ERR_OK)
   {
     UDP_MUTEX_UNLOCK();
-    
+
     UDP_LOGERROR(F("AsyncUDP::listen: failed to _udp_bind"));
-    
+
     return false;
   }
 
   _connected = true;
-  
+
   UDP_MUTEX_UNLOCK();
 
   return true;
@@ -879,7 +881,8 @@ bool AsyncUDP::listen(const ip_addr_t *addr, uint16_t port)
 
 ////////////////////////////////////////////////
 
-static esp_err_t joinMulticastGroup(const ip_addr_t *addr, bool join, tcpip_adapter_if_t tcpip_if = TCPIP_ADAPTER_IF_MAX)
+static esp_err_t joinMulticastGroup(const ip_addr_t *addr, bool join,
+                                    tcpip_adapter_if_t tcpip_if = TCPIP_ADAPTER_IF_MAX)
 {
   struct netif * netif = NULL;
 
@@ -891,7 +894,7 @@ static esp_err_t joinMulticastGroup(const ip_addr_t *addr, bool join, tcpip_adap
     if (err)
     {
       UDP_LOGERROR(F("joinMulticastGroup: failed to get_netif"));
-      
+
       return ESP_ERR_INVALID_ARG;
     }
 
@@ -904,7 +907,7 @@ static esp_err_t joinMulticastGroup(const ip_addr_t *addr, bool join, tcpip_adap
         if (igmp_joingroup_netif(netif, (const ip4_addr *) & (addr->u_addr.ip4)))
         {
           UDP_LOGERROR(F("joinMulticastGroup: IPv4 failed to joingroup"));
-          
+
           return ESP_ERR_INVALID_STATE;
         }
       }
@@ -913,7 +916,7 @@ static esp_err_t joinMulticastGroup(const ip_addr_t *addr, bool join, tcpip_adap
         if (igmp_leavegroup_netif(netif, (const ip4_addr *) & (addr->u_addr.ip4)))
         {
           UDP_LOGERROR(F("joinMulticastGroup: IPv4 failed to leavegroup"));
-          
+
           return ESP_ERR_INVALID_STATE;
         }
       }
@@ -925,7 +928,7 @@ static esp_err_t joinMulticastGroup(const ip_addr_t *addr, bool join, tcpip_adap
         if (mld6_joingroup_netif(netif, &(addr->u_addr.ip6)))
         {
           UDP_LOGERROR(F("joinMulticastGroup: IPv6 failed to joingroup"));
-          
+
           return ESP_ERR_INVALID_STATE;
         }
       }
@@ -934,7 +937,7 @@ static esp_err_t joinMulticastGroup(const ip_addr_t *addr, bool join, tcpip_adap
         if (mld6_leavegroup_netif(netif, &(addr->u_addr.ip6)))
         {
           UDP_LOGERROR(F("joinMulticastGroup: IPv6 failed to leavegroup"));
-          
+
           return ESP_ERR_INVALID_STATE;
         }
       }
@@ -988,31 +991,31 @@ bool AsyncUDP::listenMulticast(const ip_addr_t *addr, uint16_t port, uint8_t ttl
   if (!ip_addr_ismulticast(addr))
   {
     UDP_LOGERROR(F("listenMulticast: not addr_ismulticast"));
-    
+
     return false;
   }
 
   if (joinMulticastGroup(addr, true, tcpip_if) != ERR_OK)
   {
     UDP_LOGERROR(F("listenMulticast: error joinMulticast"));
-    
+
     return false;
   }
 
   if (!listen(NULL, port))
   {
     UDP_LOGERROR1(F("listenMulticast: error listen to port ="), port);
-    
+
     return false;
   }
 
   UDP_MUTEX_LOCK();
-  
+
   _pcb->mcast_ttl = ttl;
   _pcb->remote_port = port;
   ip_addr_copy(_pcb->remote_ip, *addr);
   //ip_addr_copy(_pcb->remote_ip, ip_addr_any_type);
-  
+
   UDP_MUTEX_UNLOCK();
 
   return true;
@@ -1020,14 +1023,15 @@ bool AsyncUDP::listenMulticast(const ip_addr_t *addr, uint16_t port, uint8_t ttl
 
 ////////////////////////////////////////////////
 
-size_t AsyncUDP::writeTo(const uint8_t * data, size_t len, const ip_addr_t * addr, uint16_t port, tcpip_adapter_if_t tcpip_if)
+size_t AsyncUDP::writeTo(const uint8_t * data, size_t len, const ip_addr_t * addr, uint16_t port,
+                         tcpip_adapter_if_t tcpip_if)
 {
   if (!_pcb)
   {
     UDP_MUTEX_LOCK();
-    
+
     _pcb = udp_new();
-    
+
     UDP_MUTEX_UNLOCK();
 
     if (_pcb == NULL)
@@ -1048,7 +1052,7 @@ size_t AsyncUDP::writeTo(const uint8_t * data, size_t len, const ip_addr_t * add
   {
     uint8_t* dst = reinterpret_cast<uint8_t*>(pbt->payload);
     memcpy(dst, data, len);
-    
+
     UDP_MUTEX_LOCK();
 
     if (tcpip_if < TCPIP_ADAPTER_IF_MAX)
@@ -1071,23 +1075,23 @@ size_t AsyncUDP::writeTo(const uint8_t * data, size_t len, const ip_addr_t * add
     }
 
     UDP_MUTEX_UNLOCK();
-    
+
     pbuf_free(pbt);
 
     if (_lastErr < ERR_OK)
     {
       UDP_LOGERROR1(F("AsyncUDP::writeTo: _lastErr ="), _lastErr);
-      
+
       return 0;
     }
-    
+
     UDP_LOGDEBUG1(F("AsyncUDP::writeTo: len ="), len);
 
     return len;
   }
 
   UDP_LOGERROR(F("AsyncUDP::writeTo: Error NULL pbt"));
-  
+
   return 0;
 }
 
@@ -1160,7 +1164,8 @@ bool AsyncUDP::connect(const IPAddress addr, uint16_t port)
 
 ////////////////////////////////////////////////
 
-size_t AsyncUDP::writeTo(const uint8_t *data, size_t len, const IPAddress addr, uint16_t port, tcpip_adapter_if_t tcpip_if)
+size_t AsyncUDP::writeTo(const uint8_t *data, size_t len, const IPAddress addr, uint16_t port,
+                         tcpip_adapter_if_t tcpip_if)
 {
   ip_addr_t daddr;
   daddr.type = IPADDR_TYPE_V4;
@@ -1216,7 +1221,8 @@ bool AsyncUDP::connect(const IPv6Address addr, uint16_t port)
 
 ////////////////////////////////////////////////
 
-size_t AsyncUDP::writeTo(const uint8_t *data, size_t len, const IPv6Address addr, uint16_t port, tcpip_adapter_if_t tcpip_if)
+size_t AsyncUDP::writeTo(const uint8_t *data, size_t len, const IPv6Address addr, uint16_t port,
+                         tcpip_adapter_if_t tcpip_if)
 {
   ip_addr_t daddr;
   daddr.type = IPADDR_TYPE_V6;
@@ -1300,11 +1306,11 @@ size_t AsyncUDP::sendTo(AsyncUDPMessage &message, const ip_addr_t *addr, uint16_
 
 size_t AsyncUDP::sendTo(AsyncUDPMessage &message, const IPAddress addr, uint16_t port, tcpip_adapter_if_t tcpip_if)
 {
-  if (!message) 
+  if (!message)
   {
     return 0;
   }
-  
+
   return writeTo(message.data(), message.length(), addr, port, tcpip_if);
 }
 
